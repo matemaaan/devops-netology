@@ -39,3 +39,35 @@ export PATH="/tmp/newDir/:$PATH"
 12. ssh -t localhost 'tty'
 13. reptyr -T <PID>
 14. tee читает из input в output и файл. Работает потому что запущена из под рут и 
+
+Лекция 3
+1. chdir("/tmp")
+2. openat(AT_FDCWD, "/usr/share/misc/magic.mgc", O_RDONLY) = 3
+3. echo '' > /proc/<PID>/fd/3
+4. нет, остается только запись в таблице процессов
+5.vagrant@vagrant:~$ sudo /usr/sbin/opensnoop-bpfcc
+PID    COMM               FD ERR PATH
+856    vminfo              6   0 /var/run/utmp
+621    dbus-daemon        -1   2 /usr/local/share/dbus-1/system-services
+621    dbus-daemon        20   0 /usr/share/dbus-1/system-services
+621    dbus-daemon        -1   2 /lib/dbus-1/system-services
+621    dbus-daemon        20   0 /var/lib/snapd/dbus-1/system-services/
+629    irqbalance          6   0 /proc/interrupts
+629    irqbalance          6   0 /proc/stat
+629    irqbalance          6   0 /proc/irq/20/smp_affinity
+629    irqbalance          6   0 /proc/irq/0/smp_affinity
+629    irqbalance          6   0 /proc/irq/1/smp_affinity
+629    irqbalance          6   0 /proc/irq/8/smp_affinity
+629    irqbalance          6   0 /proc/irq/12/smp_affinity
+629    irqbalance          6   0 /proc/irq/14/smp_affinity
+629    irqbalance          6   0 /proc/irq/15/smp_affinity
+6. Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version, domainname}.
+7. при ; команды будут запущены последовательно в любом случае. При && команды будут запущены последовательно, только при успешном выполнении предыдущей команды.
+8. set -euxo pipefail
+-e - прекращает выполнение скрипта если команда завершилась ошибкой, выводит в stderr строку с ошибкой
+-u - прекращает выполнение скрипта, если встретилась несуществующая переменная
+-x - выводит выполняемые команды в stdout перед выполненинем
+-o pipefail - прекращает выполнение скрипта, даже если одна из частей пайпа завершилась ошибкой
+Хорошо использовать потому что происходит автоматическая обработка ошибок.
+9. Ss - процесс, ожидающий завершения
+R+ - процесс выполняется
