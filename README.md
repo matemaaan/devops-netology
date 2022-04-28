@@ -1,18 +1,18 @@
 Лекция 4
-1. wget https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-amd64.tar.gz
-tar -xf node_exporter-1.3.1.linux-amd64.tar.gz
-sudo cp node_exporter-1.3.1.linux-amd64/node_exporter /usr/local/bin/
-sudo nano /etc/systemd/system/node_exporter.service
-
+1. wget https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-amd64.tar.gz  
+tar -xf node_exporter-1.3.1.linux-amd64.tar.gz  
+sudo cp node_exporter-1.3.1.linux-amd64/node_exporter /usr/local/bin/  
+sudo nano /etc/systemd/system/node_exporter.service  
+```
 [Unit]
 Description=Node Exporter
 After=network.target
 
 [Service]
-Type=simple
-User=vagrant
+Type=simple 
+User=vagrant 
 Group=vagrant
-ExecStart=/usr/local/bin/node_exporter
+ExecStart=/usr/local/bin/node_exporter $OPTIONS
 EnvironmentFile=/etc/default/node_exporter
 
 SyslogIdentifier=node_exporter
@@ -29,7 +29,7 @@ ProtectKernelTunables=yes
 
 [Install]
 WantedBy=multi-user.target
-
+```
 
 sudo systemctl daemon-reload
 sudo systemctl enable node_exporter
