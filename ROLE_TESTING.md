@@ -324,9 +324,11 @@ ERROR:   py39-ansible30: commands failed
 ### 6.  
 
 ```
-[root@16777cd2f70b vector-role]# tox
+user@ubuntu:~/devops/roles/vector-role$ docker run --rm --privileged=True -v /home/user/devops/roles/vector-role:/opt/vector-role -w /opt/vector-role -it aragast/netology:latest /bin/bash
+[root@d8760781475b vector-role]# vi /etc/containers/containers.conf 
+[root@d8760781475b vector-role]# tox
 py37-ansible210 installed: ansible==2.10.7,ansible-base==2.10.17,ansible-compat==1.0.0,ansible-lint==5.1.3,arrow==1.2.3,bcrypt==4.0.0,binaryornot==0.4.4,bracex==2.3.post1,cached-property==1.5.2,Cerberus==1.3.2,certifi==2022.9.24,cffi==1.15.1,chardet==5.0.0,charset-normalizer==2.1.1,click==8.1.3,click-help-colors==0.9.1,commonmark==0.9.1,cookiecutter==2.1.1,cryptography==38.0.1,distro==1.7.0,enrich==1.2.7,idna==3.4,importlib-metadata==5.0.0,Jinja2==3.1.2,jinja2-time==0.2.0,jmespath==1.0.1,lxml==4.9.1,MarkupSafe==2.1.1,molecule==3.4.0,molecule-podman==1.0.1,packaging==21.3,paramiko==2.11.0,pathspec==0.10.1,pluggy==0.13.1,pycparser==2.21,Pygments==2.13.0,PyNaCl==1.5.0,pyparsing==3.0.9,python-dateutil==2.8.2,python-slugify==6.1.2,PyYAML==5.4.1,requests==2.28.1,rich==12.6.0,ruamel.yaml==0.17.21,ruamel.yaml.clib==0.2.6,selinux==0.2.1,six==1.16.0,subprocess-tee==0.3.5,tenacity==8.1.0,text-unidecode==1.3,typing_extensions==4.3.0,urllib3==1.26.12,wcmatch==8.4.1,yamllint==1.26.3,zipp==3.8.1
-py37-ansible210 run-test-pre: PYTHONHASHSEED='4179388404'
+py37-ansible210 run-test-pre: PYTHONHASHSEED='1804913881'
 py37-ansible210 run-test: commands[0] | molecule test -s centos_8_lite --destroy always
 INFO     centos_8_lite scenario test matrix: create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
 INFO     Performing prerun...
@@ -386,13 +388,33 @@ FAILED - RETRYING: Wait for instance(s) creation to complete (294 retries left).
 FAILED - RETRYING: Wait for instance(s) creation to complete (293 retries left).
 FAILED - RETRYING: Wait for instance(s) creation to complete (292 retries left).
 FAILED - RETRYING: Wait for instance(s) creation to complete (291 retries left).
-failed: [localhost] (item=instance) => {"ansible_job_id": "923838687236.400", "ansible_loop_var": "item", "attempts": 11, "changed": true, "cmd": ["/usr/bin/podman", "run", "-d", "--name", "instance", "--hostname=instance", "quay.io/centos/centos:stream8", "bash", "-c", "while true; do sleep 10000; done"], "delta": "0:00:50.094721", "end": "2022-10-06 02:40:45.097976", "finished": 1, "item": {"ansible_job_id": "923838687236.400", "ansible_loop_var": "item", "changed": true, "failed": false, "finished": 0, "item": {"image": "quay.io/centos/centos:stream8", "name": "instance", "pre_build_image": true}, "results_file": "/root/.ansible_async/923838687236.400", "started": 1}, "msg": "non-zero return code", "rc": 125, "start": "2022-10-06 02:39:55.003255", "stderr": "Trying to pull quay.io/centos/centos:stream8...\nGetting image source signatures\nCopying blob sha256:0d557d32f54ebd277fdffbbdf656b90442ee9d8753aec9ebac429eee967f4dee\nCopying blob sha256:6c5de04c936da27e33992af1e54e929f1cb39c8e1473d9d25ed1f1dc2d842fd4\nCopying blob sha256:f1ee40d9db4a2bf9b96ea48d6cb45c602a6761650f67dc84bba5a0d2495e845a\nCopying blob sha256:17facd475902d6709cff908630b59271c7ad18f64c3a1d0143d438c6988504ef\nCopying blob sha256:f1ee40d9db4a2bf9b96ea48d6cb45c602a6761650f67dc84bba5a0d2495e845a\nCopying blob sha256:6c5de04c936da27e33992af1e54e929f1cb39c8e1473d9d25ed1f1dc2d842fd4\nCopying blob sha256:17facd475902d6709cff908630b59271c7ad18f64c3a1d0143d438c6988504ef\nCopying blob sha256:0d557d32f54ebd277fdffbbdf656b90442ee9d8753aec9ebac429eee967f4dee\nCopying config sha256:660b134163631b1901acda557fe0edbdede3febab49bdd393f0c57bba602894b\nWriting manifest to image destination\nStoring signatures\nError: invalid config provided: cannot set hostname when running in the host UTS namespace: invalid configuration", "stderr_lines": ["Trying to pull quay.io/centos/centos:stream8...", "Getting image source signatures", "Copying blob sha256:0d557d32f54ebd277fdffbbdf656b90442ee9d8753aec9ebac429eee967f4dee", "Copying blob sha256:6c5de04c936da27e33992af1e54e929f1cb39c8e1473d9d25ed1f1dc2d842fd4", "Copying blob sha256:f1ee40d9db4a2bf9b96ea48d6cb45c602a6761650f67dc84bba5a0d2495e845a", "Copying blob sha256:17facd475902d6709cff908630b59271c7ad18f64c3a1d0143d438c6988504ef", "Copying blob sha256:f1ee40d9db4a2bf9b96ea48d6cb45c602a6761650f67dc84bba5a0d2495e845a", "Copying blob sha256:6c5de04c936da27e33992af1e54e929f1cb39c8e1473d9d25ed1f1dc2d842fd4", "Copying blob sha256:17facd475902d6709cff908630b59271c7ad18f64c3a1d0143d438c6988504ef", "Copying blob sha256:0d557d32f54ebd277fdffbbdf656b90442ee9d8753aec9ebac429eee967f4dee", "Copying config sha256:660b134163631b1901acda557fe0edbdede3febab49bdd393f0c57bba602894b", "Writing manifest to image destination", "Storing signatures", "Error: invalid config provided: cannot set hostname when running in the host UTS namespace: invalid configuration"], "stdout": "", "stdout_lines": []}
+changed: [localhost] => (item=instance)
 
 PLAY RECAP *********************************************************************
-localhost                  : ok=7    changed=2    unreachable=0    failed=1    skipped=5    rescued=0    ignored=0
+localhost                  : ok=8    changed=3    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0
 
-CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '--inventory', '/root/.cache/molecule/vector-role/centos_8_lite/inventory', '--skip-tags', 'molecule-notest,notest', '/opt/vector-role/.tox/py37-ansible210/lib/python3.7/site-packages/molecule_podman/playbooks/create.yml']
-WARNING  An error occurred during the test sequence action: 'create'. Cleaning up.
+INFO     Running centos_8_lite > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Running centos_8_lite > converge
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [instance]
+
+TASK [Copy something to test use of synchronize module] ************************
+changed: [instance]
+
+TASK [Include vector-role] *****************************************************
+
+TASK [vector-role : install rpm] ***********************************************
+fatal: [instance]: FAILED! => {"changed": false, "module_stderr": "/bin/sh: sudo: command not found\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 127}
+
+PLAY RECAP *********************************************************************
+instance                   : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
+
+CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '--inventory', '/root/.cache/molecule/vector-role/centos_8_lite/inventory', '--skip-tags', 'molecule-notest,notest', '/opt/vector-role/molecule/centos_8_lite/converge.yml']
+WARNING  An error occurred during the test sequence action: 'converge'. Cleaning up.
 INFO     Running centos_8_lite > cleanup
 WARNING  Skipping, cleanup playbook not configured.
 INFO     Running centos_8_lite > destroy
@@ -404,7 +426,8 @@ changed: [localhost] => (item={'image': 'quay.io/centos/centos:stream8', 'name':
 
 TASK [Wait for instance(s) deletion to complete] *******************************
 FAILED - RETRYING: Wait for instance(s) deletion to complete (300 retries left).
-changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '84216988008.660', 'results_file': '/root/.ansible_async/84216988008.660', 'changed': True, 'failed': False, 'item': {'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
+FAILED - RETRYING: Wait for instance(s) deletion to complete (299 retries left).
+changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '341500089265.1186', 'results_file': '/root/.ansible_async/341500089265.1186', 'changed': True, 'failed': False, 'item': {'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
 
 PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
@@ -412,7 +435,7 @@ localhost                  : ok=2    changed=2    unreachable=0    failed=0    s
 INFO     Pruning extra files from scenario ephemeral directory
 ERROR: InvocationError for command /opt/vector-role/.tox/py37-ansible210/bin/molecule test -s centos_8_lite --destroy always (exited with code 1)
 py37-ansible30 installed: ansible==3.0.0,ansible-base==2.10.17,ansible-compat==1.0.0,ansible-lint==5.1.3,arrow==1.2.3,bcrypt==4.0.0,binaryornot==0.4.4,bracex==2.3.post1,cached-property==1.5.2,Cerberus==1.3.2,certifi==2022.9.24,cffi==1.15.1,chardet==5.0.0,charset-normalizer==2.1.1,click==8.1.3,click-help-colors==0.9.1,commonmark==0.9.1,cookiecutter==2.1.1,cryptography==38.0.1,distro==1.7.0,enrich==1.2.7,idna==3.4,importlib-metadata==5.0.0,Jinja2==3.1.2,jinja2-time==0.2.0,jmespath==1.0.1,lxml==4.9.1,MarkupSafe==2.1.1,molecule==3.4.0,molecule-podman==1.0.1,packaging==21.3,paramiko==2.11.0,pathspec==0.10.1,pluggy==0.13.1,pycparser==2.21,Pygments==2.13.0,PyNaCl==1.5.0,pyparsing==3.0.9,python-dateutil==2.8.2,python-slugify==6.1.2,PyYAML==5.4.1,requests==2.28.1,rich==12.6.0,ruamel.yaml==0.17.21,ruamel.yaml.clib==0.2.6,selinux==0.2.1,six==1.16.0,subprocess-tee==0.3.5,tenacity==8.1.0,text-unidecode==1.3,typing_extensions==4.3.0,urllib3==1.26.12,wcmatch==8.4.1,yamllint==1.26.3,zipp==3.8.1
-py37-ansible30 run-test-pre: PYTHONHASHSEED='4179388404'
+py37-ansible30 run-test-pre: PYTHONHASHSEED='1804913881'
 py37-ansible30 run-test: commands[0] | molecule test -s centos_8_lite --destroy always
 INFO     centos_8_lite scenario test matrix: create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
 INFO     Performing prerun...
@@ -462,13 +485,34 @@ TASK [Create molecule instance(s)] *********************************************
 changed: [localhost] => (item=instance)
 
 TASK [Wait for instance(s) creation to complete] *******************************
-failed: [localhost] (item=instance) => {"ansible_job_id": "700678358022.866", "ansible_loop_var": "item", "attempts": 1, "changed": true, "cmd": ["/usr/bin/podman", "run", "-d", "--name", "instance", "--hostname=instance", "quay.io/centos/centos:stream8", "bash", "-c", "while true; do sleep 10000; done"], "delta": "0:00:00.035080", "end": "2022-10-06 02:40:57.369384", "finished": 1, "item": {"ansible_job_id": "700678358022.866", "ansible_loop_var": "item", "changed": true, "failed": false, "finished": 0, "item": {"image": "quay.io/centos/centos:stream8", "name": "instance", "pre_build_image": true}, "results_file": "/root/.ansible_async/700678358022.866", "started": 1}, "msg": "non-zero return code", "rc": 125, "start": "2022-10-06 02:40:57.334304", "stderr": "Error: invalid config provided: cannot set hostname when running in the host UTS namespace: invalid configuration", "stderr_lines": ["Error: invalid config provided: cannot set hostname when running in the host UTS namespace: invalid configuration"], "stdout": "", "stdout_lines": []}
+FAILED - RETRYING: Wait for instance(s) creation to complete (300 retries left).
+changed: [localhost] => (item=instance)
 
 PLAY RECAP *********************************************************************
-localhost                  : ok=7    changed=2    unreachable=0    failed=1    skipped=5    rescued=0    ignored=0
+localhost                  : ok=8    changed=3    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0
 
-CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '--inventory', '/root/.cache/molecule/vector-role/centos_8_lite/inventory', '--skip-tags', 'molecule-notest,notest', '/opt/vector-role/.tox/py37-ansible30/lib/python3.7/site-packages/molecule_podman/playbooks/create.yml']
-WARNING  An error occurred during the test sequence action: 'create'. Cleaning up.
+INFO     Running centos_8_lite > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Running centos_8_lite > converge
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [instance]
+
+TASK [Copy something to test use of synchronize module] ************************
+changed: [instance]
+
+TASK [Include vector-role] *****************************************************
+
+TASK [vector-role : install rpm] ***********************************************
+fatal: [instance]: FAILED! => {"changed": false, "module_stderr": "/bin/sh: sudo: command not found\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 127}
+
+PLAY RECAP *********************************************************************
+instance                   : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
+
+CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '--inventory', '/root/.cache/molecule/vector-role/centos_8_lite/inventory', '--skip-tags', 'molecule-notest,notest', '/opt/vector-role/molecule/centos_8_lite/converge.yml']
+WARNING  An error occurred during the test sequence action: 'converge'. Cleaning up.
 INFO     Running centos_8_lite > cleanup
 WARNING  Skipping, cleanup playbook not configured.
 INFO     Running centos_8_lite > destroy
@@ -479,7 +523,9 @@ TASK [Destroy molecule instance(s)] ********************************************
 changed: [localhost] => (item={'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True})
 
 TASK [Wait for instance(s) deletion to complete] *******************************
-changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '101979651698.924', 'results_file': '/root/.ansible_async/101979651698.924', 'changed': True, 'failed': False, 'item': {'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
+FAILED - RETRYING: Wait for instance(s) deletion to complete (300 retries left).
+FAILED - RETRYING: Wait for instance(s) deletion to complete (299 retries left).
+changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '68571507610.2286', 'results_file': '/root/.ansible_async/68571507610.2286', 'changed': True, 'failed': False, 'item': {'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
 
 PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
@@ -487,7 +533,7 @@ localhost                  : ok=2    changed=2    unreachable=0    failed=0    s
 INFO     Pruning extra files from scenario ephemeral directory
 ERROR: InvocationError for command /opt/vector-role/.tox/py37-ansible30/bin/molecule test -s centos_8_lite --destroy always (exited with code 1)
 py39-ansible210 installed: ansible==2.10.7,ansible-base==2.10.17,ansible-compat==2.2.1,ansible-lint==5.1.3,arrow==1.2.3,attrs==22.1.0,bcrypt==4.0.0,binaryornot==0.4.4,bracex==2.3.post1,Cerberus==1.3.2,certifi==2022.9.24,cffi==1.15.1,chardet==5.0.0,charset-normalizer==2.1.1,click==8.1.3,click-help-colors==0.9.1,commonmark==0.9.1,cookiecutter==2.1.1,cryptography==38.0.1,distro==1.7.0,enrich==1.2.7,idna==3.4,Jinja2==3.1.2,jinja2-time==0.2.0,jmespath==1.0.1,jsonschema==4.16.0,lxml==4.9.1,MarkupSafe==2.1.1,molecule==3.4.0,molecule-podman==1.0.1,packaging==21.3,paramiko==2.11.0,pathspec==0.10.1,pluggy==0.13.1,pycparser==2.21,Pygments==2.13.0,PyNaCl==1.5.0,pyparsing==3.0.9,pyrsistent==0.18.1,python-dateutil==2.8.2,python-slugify==6.1.2,PyYAML==5.4.1,requests==2.28.1,rich==12.6.0,ruamel.yaml==0.17.21,ruamel.yaml.clib==0.2.6,selinux==0.2.1,six==1.16.0,subprocess-tee==0.3.5,tenacity==8.1.0,text-unidecode==1.3,urllib3==1.26.12,wcmatch==8.4.1,yamllint==1.26.3
-py39-ansible210 run-test-pre: PYTHONHASHSEED='4179388404'
+py39-ansible210 run-test-pre: PYTHONHASHSEED='1804913881'
 py39-ansible210 run-test: commands[0] | molecule test -s centos_8_lite --destroy always
 INFO     centos_8_lite scenario test matrix: create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
 INFO     Performing prerun...
@@ -537,13 +583,34 @@ TASK [Create molecule instance(s)] *********************************************
 changed: [localhost] => (item=instance)
 
 TASK [Wait for instance(s) creation to complete] *******************************
-failed: [localhost] (item=instance) => {"ansible_job_id": "404962924503.1090", "ansible_loop_var": "item", "attempts": 1, "changed": true, "cmd": ["/usr/bin/podman", "run", "-d", "--name", "instance", "--hostname=instance", "quay.io/centos/centos:stream8", "bash", "-c", "while true; do sleep 10000; done"], "delta": "0:00:00.034534", "end": "2022-10-06 02:41:02.796348", "finished": 1, "item": {"ansible_job_id": "404962924503.1090", "ansible_loop_var": "item", "changed": true, "failed": false, "finished": 0, "item": {"image": "quay.io/centos/centos:stream8", "name": "instance", "pre_build_image": true}, "results_file": "/root/.ansible_async/404962924503.1090", "started": 1}, "msg": "non-zero return code", "rc": 125, "start": "2022-10-06 02:41:02.761814", "stderr": "Error: invalid config provided: cannot set hostname when running in the host UTS namespace: invalid configuration", "stderr_lines": ["Error: invalid config provided: cannot set hostname when running in the host UTS namespace: invalid configuration"], "stdout": "", "stdout_lines": []}
+FAILED - RETRYING: Wait for instance(s) creation to complete (300 retries left).
+changed: [localhost] => (item=instance)
 
 PLAY RECAP *********************************************************************
-localhost                  : ok=7    changed=2    unreachable=0    failed=1    skipped=5    rescued=0    ignored=0
+localhost                  : ok=8    changed=3    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0
 
-CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '--inventory', '/root/.cache/molecule/vector-role/centos_8_lite/inventory', '--skip-tags', 'molecule-notest,notest', '/opt/vector-role/.tox/py39-ansible210/lib/python3.9/site-packages/molecule_podman/playbooks/create.yml']
-WARNING  An error occurred during the test sequence action: 'create'. Cleaning up.
+INFO     Running centos_8_lite > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Running centos_8_lite > converge
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [instance]
+
+TASK [Copy something to test use of synchronize module] ************************
+changed: [instance]
+
+TASK [Include vector-role] *****************************************************
+
+TASK [vector-role : install rpm] ***********************************************
+fatal: [instance]: FAILED! => {"changed": false, "module_stderr": "/bin/sh: sudo: command not found\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 127}
+
+PLAY RECAP *********************************************************************
+instance                   : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
+
+CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '--inventory', '/root/.cache/molecule/vector-role/centos_8_lite/inventory', '--skip-tags', 'molecule-notest,notest', '/opt/vector-role/molecule/centos_8_lite/converge.yml']
+WARNING  An error occurred during the test sequence action: 'converge'. Cleaning up.
 INFO     Running centos_8_lite > cleanup
 WARNING  Skipping, cleanup playbook not configured.
 INFO     Running centos_8_lite > destroy
@@ -554,7 +621,9 @@ TASK [Destroy molecule instance(s)] ********************************************
 changed: [localhost] => (item={'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True})
 
 TASK [Wait for instance(s) deletion to complete] *******************************
-changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '547582102574.1139', 'results_file': '/root/.ansible_async/547582102574.1139', 'changed': True, 'failed': False, 'item': {'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
+FAILED - RETRYING: Wait for instance(s) deletion to complete (300 retries left).
+FAILED - RETRYING: Wait for instance(s) deletion to complete (299 retries left).
+changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '520426919961.3362', 'results_file': '/root/.ansible_async/520426919961.3362', 'changed': True, 'failed': False, 'item': {'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
 
 PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
@@ -562,7 +631,7 @@ localhost                  : ok=2    changed=2    unreachable=0    failed=0    s
 INFO     Pruning extra files from scenario ephemeral directory
 ERROR: InvocationError for command /opt/vector-role/.tox/py39-ansible210/bin/molecule test -s centos_8_lite --destroy always (exited with code 1)
 py39-ansible30 installed: ansible==3.0.0,ansible-base==2.10.17,ansible-compat==2.2.1,ansible-lint==5.1.3,arrow==1.2.3,attrs==22.1.0,bcrypt==4.0.0,binaryornot==0.4.4,bracex==2.3.post1,Cerberus==1.3.2,certifi==2022.9.24,cffi==1.15.1,chardet==5.0.0,charset-normalizer==2.1.1,click==8.1.3,click-help-colors==0.9.1,commonmark==0.9.1,cookiecutter==2.1.1,cryptography==38.0.1,distro==1.7.0,enrich==1.2.7,idna==3.4,Jinja2==3.1.2,jinja2-time==0.2.0,jmespath==1.0.1,jsonschema==4.16.0,lxml==4.9.1,MarkupSafe==2.1.1,molecule==3.4.0,molecule-podman==1.0.1,packaging==21.3,paramiko==2.11.0,pathspec==0.10.1,pluggy==0.13.1,pycparser==2.21,Pygments==2.13.0,PyNaCl==1.5.0,pyparsing==3.0.9,pyrsistent==0.18.1,python-dateutil==2.8.2,python-slugify==6.1.2,PyYAML==5.4.1,requests==2.28.1,rich==12.6.0,ruamel.yaml==0.17.21,ruamel.yaml.clib==0.2.6,selinux==0.2.1,six==1.16.0,subprocess-tee==0.3.5,tenacity==8.1.0,text-unidecode==1.3,urllib3==1.26.12,wcmatch==8.4.1,yamllint==1.26.3
-py39-ansible30 run-test-pre: PYTHONHASHSEED='4179388404'
+py39-ansible30 run-test-pre: PYTHONHASHSEED='1804913881'
 py39-ansible30 run-test: commands[0] | molecule test -s centos_8_lite --destroy always
 INFO     centos_8_lite scenario test matrix: create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
 INFO     Performing prerun...
@@ -612,13 +681,34 @@ TASK [Create molecule instance(s)] *********************************************
 changed: [localhost] => (item=instance)
 
 TASK [Wait for instance(s) creation to complete] *******************************
-failed: [localhost] (item=instance) => {"ansible_job_id": "864680078280.1299", "ansible_loop_var": "item", "attempts": 1, "changed": true, "cmd": ["/usr/bin/podman", "run", "-d", "--name", "instance", "--hostname=instance", "quay.io/centos/centos:stream8", "bash", "-c", "while true; do sleep 10000; done"], "delta": "0:00:00.036501", "end": "2022-10-06 02:41:08.382131", "finished": 1, "item": {"ansible_job_id": "864680078280.1299", "ansible_loop_var": "item", "changed": true, "failed": false, "finished": 0, "item": {"image": "quay.io/centos/centos:stream8", "name": "instance", "pre_build_image": true}, "results_file": "/root/.ansible_async/864680078280.1299", "started": 1}, "msg": "non-zero return code", "rc": 125, "start": "2022-10-06 02:41:08.345630", "stderr": "Error: invalid config provided: cannot set hostname when running in the host UTS namespace: invalid configuration", "stderr_lines": ["Error: invalid config provided: cannot set hostname when running in the host UTS namespace: invalid configuration"], "stdout": "", "stdout_lines": []}
+FAILED - RETRYING: Wait for instance(s) creation to complete (300 retries left).
+changed: [localhost] => (item=instance)
 
 PLAY RECAP *********************************************************************
-localhost                  : ok=7    changed=2    unreachable=0    failed=1    skipped=5    rescued=0    ignored=0
+localhost                  : ok=8    changed=3    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0
 
-CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '--inventory', '/root/.cache/molecule/vector-role/centos_8_lite/inventory', '--skip-tags', 'molecule-notest,notest', '/opt/vector-role/.tox/py39-ansible30/lib/python3.9/site-packages/molecule_podman/playbooks/create.yml']
-WARNING  An error occurred during the test sequence action: 'create'. Cleaning up.
+INFO     Running centos_8_lite > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Running centos_8_lite > converge
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [instance]
+
+TASK [Copy something to test use of synchronize module] ************************
+changed: [instance]
+
+TASK [Include vector-role] *****************************************************
+
+TASK [vector-role : install rpm] ***********************************************
+fatal: [instance]: FAILED! => {"changed": false, "module_stderr": "/bin/sh: sudo: command not found\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 127}
+
+PLAY RECAP *********************************************************************
+instance                   : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
+
+CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '--inventory', '/root/.cache/molecule/vector-role/centos_8_lite/inventory', '--skip-tags', 'molecule-notest,notest', '/opt/vector-role/molecule/centos_8_lite/converge.yml']
+WARNING  An error occurred during the test sequence action: 'converge'. Cleaning up.
 INFO     Running centos_8_lite > cleanup
 WARNING  Skipping, cleanup playbook not configured.
 INFO     Running centos_8_lite > destroy
@@ -630,14 +720,15 @@ changed: [localhost] => (item={'image': 'quay.io/centos/centos:stream8', 'name':
 
 TASK [Wait for instance(s) deletion to complete] *******************************
 FAILED - RETRYING: Wait for instance(s) deletion to complete (300 retries left).
-changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '780447846908.1349', 'results_file': '/root/.ansible_async/780447846908.1349', 'changed': True, 'failed': False, 'item': {'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
+FAILED - RETRYING: Wait for instance(s) deletion to complete (299 retries left).
+changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '460629848637.4430', 'results_file': '/root/.ansible_async/460629848637.4430', 'changed': True, 'failed': False, 'item': {'image': 'quay.io/centos/centos:stream8', 'name': 'instance', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
 
 PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
 INFO     Pruning extra files from scenario ephemeral directory
 ERROR: InvocationError for command /opt/vector-role/.tox/py39-ansible30/bin/molecule test -s centos_8_lite --destroy always (exited with code 1)
-_______________________________________________________________ summary ________________________________________________________________
+_________________________________________________________________________________________ summary __________________________________________________________________________________________
 ERROR:   py37-ansible210: commands failed
 ERROR:   py37-ansible30: commands failed
 ERROR:   py39-ansible210: commands failed
