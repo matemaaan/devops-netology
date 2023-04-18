@@ -39,3 +39,5 @@
 ![изображение](https://user-images.githubusercontent.com/89702147/232710548-b20c6388-a620-4b09-890f-317f07661eb0.png)
 результат выполнения скрипта
 ![изображение](https://user-images.githubusercontent.com/89702147/232710667-09fbb525-b28a-4b28-9281-724d2a56385c.png)
+манифесты  
+https://github.com/matemaaan/devops-netology/tree/k8s/hw3
